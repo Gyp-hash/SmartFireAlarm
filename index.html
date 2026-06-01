@@ -43,10 +43,16 @@
         --status-color: var(--accent-teal);
       }
 
+      @property --theme-glow {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: rgba(0, 245, 212, 0.03);
+      }
+
       body {
         background-color: var(--background);
         background-image: radial-gradient(circle at 50% -25%, var(--theme-glow), transparent 65%);
-        transition: background-image 0.6s ease;
+        transition: --theme-glow 0.8s ease;
       }
 
       *, *::before, *::after {
@@ -102,22 +108,30 @@
               <p id="statusDesc" class="text-[10px] md:text-[11px] font-bold tracking-wide uppercase opacity-75 mt-2">Seluruh sensor membaca keadaan ruangan pada status aman</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-3xl pt-2 font-mono text-[10px] text-center text-slate-400">
-              <div class="flex flex-col items-center gap-1">
-                <span class="text-slate-500 text-[8px] uppercase tracking-wider flex items-center gap-1"><iconify-icon icon="solar:link-bold" class="text-blue-400/80"></iconify-icon>HOST LINK</span>
-                <span class="font-bold text-blue-400 tracking-wide">CONNECTED</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-3xl pt-3 font-mono text-center">
+              <div class="flex flex-col items-center gap-1.5">
+                <span class="text-slate-500 text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5 select-none">
+                  <iconify-icon icon="solar:link-bold" class="text-blue-400/80" width="14" height="14"></iconify-icon>HOST LINK
+                </span>
+                <span class="font-bold text-blue-400 tracking-wide text-sm md:text-base">CONNECTED</span>
               </div>
-              <div class="flex flex-col items-center gap-1">
-                <span class="text-slate-500 text-[8px] uppercase tracking-wider flex items-center gap-1"><iconify-icon icon="solar:wifi-bold" class="text-indigo-400/80"></iconify-icon>WIFI SIGNAL</span>
-                <span id="wifiRssi" class="font-bold text-white">-48 dBm</span>
+              <div class="flex flex-col items-center gap-1.5">
+                <span class="text-slate-500 text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5 select-none">
+                  <iconify-icon icon="solar:wifi-bold" class="text-indigo-400/80" width="14" height="14"></iconify-icon>WIFI SIGNAL
+                </span>
+                <span id="wifiRssi" class="font-bold text-white tracking-wide text-sm md:text-base">-- dBm</span>
               </div>
-              <div class="flex flex-col items-center gap-1">
-                <span class="text-slate-500 text-[8px] uppercase tracking-wider flex items-center gap-1"><iconify-icon icon="solar:cpu-bold" class="text-amber-400/80"></iconify-icon>CORE TEMP</span>
-                <span id="coreTemp" class="font-bold text-white">41.2 °C</span>
+              <div class="flex flex-col items-center gap-1.5">
+                <span class="text-slate-500 text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5 select-none">
+                  <iconify-icon icon="solar:cpu-bold" class="text-amber-400/80" width="14" height="14"></iconify-icon>CORE TEMP
+                </span>
+                <span id="coreTemp" class="font-bold text-white tracking-wide text-sm md:text-base">-- °C</span>
               </div>
-              <div class="flex flex-col items-center gap-1">
-                <span class="text-slate-500 text-[8px] uppercase tracking-wider flex items-center gap-1"><iconify-icon icon="solar:clock-circle-bold" class="text-emerald-400/80"></iconify-icon>SYS UPTIME</span>
-                <span id="sysUptime" class="font-bold text-[var(--status-color)] transition-colors duration-500">24h Active</span>
+              <div class="flex flex-col items-center gap-1.5">
+                <span class="text-slate-500 text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5 select-none">
+                  <iconify-icon icon="solar:clock-circle-bold" class="text-emerald-400/80" width="14" height="14"></iconify-icon>SYS UPTIME
+                </span>
+                <span id="sysUptime" class="font-bold text-[var(--status-color)] transition-colors duration-500 tracking-wide text-sm md:text-base">--</span>
               </div>
             </div>
           </div>
@@ -171,7 +185,7 @@
                   <iconify-icon icon="solar:history-bold" class="text-blue-400/70"></iconify-icon>Latest Update
                 </span>
                 <div id="flameHistoryBarsContainer" class="w-full bg-black/40 border border-white/[0.03] rounded-xl p-3 h-48 flex items-end justify-between gap-2.5 relative overflow-hidden">
-                  </div>
+                </div>
               </div>
             </div>
 
@@ -182,46 +196,46 @@
         <div id="view-detail" class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start transition-all duration-300 hidden">
           
           <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-6 shadow-2xl backdrop-blur-2xl flex flex-col gap-4 md:col-span-2">
-            <span class="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
-              <iconify-icon icon="solar:checklist-bold" class="text-slate-400/60"></iconify-icon>Threshold Matrix Reference
+            <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
+              <iconify-icon icon="solar:checklist-bold" class="text-slate-400/60" width="14" height="14"></iconify-icon>Threshold Matrix Reference
             </span>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
-              <div class="bg-black/30 border border-white/[0.03] p-4 rounded-xl flex items-center justify-between">
+              <div class="bg-black/30 border border-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.01] p-4 rounded-xl flex items-center justify-between transition-all duration-300">
                 <div class="flex items-center gap-3">
                   <div class="p-1.5 bg-white/[0.02] border border-white/[0.05] rounded-lg">
                     <iconify-icon icon="solar:shield-check-bold" width="18" height="18" class="text-[var(--accent-teal)]"></iconify-icon>
                   </div>
                   <div>
-                    <h4 class="text-xs font-black text-white uppercase font-heading">Sistem Aman</h4>
-                    <p class="text-[10px] font-medium text-slate-400/70 mt-0.5">Kondisi udara normal & bersih</p>
+                    <h4 class="text-xs md:text-sm font-black text-white uppercase font-heading">Sistem Aman</h4>
+                    <p class="text-[11px] md:text-xs font-medium text-slate-400/70 mt-0.5">Kondisi udara normal & bersih</p>
                   </div>
                 </div>
-                <span class="font-mono text-xs font-bold text-[var(--accent-teal)]">&lt; 1000 PPM</span>
+                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-teal)]">&lt; 1000 PPM</span>
               </div>
-              <div class="bg-black/30 border border-white/[0.03] p-4 rounded-xl flex items-center justify-between">
+              <div class="bg-black/30 border border-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.01] p-4 rounded-xl flex items-center justify-between transition-all duration-300">
                 <div class="flex items-center gap-3">
                   <div class="p-1.5 bg-white/[0.02] border border-white/[0.05] rounded-lg">
                     <iconify-icon icon="solar:danger-triangle-bold" width="18" height="18" class="text-[var(--accent-orange)]"></iconify-icon>
                   </div>
                   <div>
-                    <h4 class="text-xs font-black text-white uppercase font-heading">Waspada Asap</h4>
-                    <p class="text-[10px] font-medium text-slate-400/70 mt-0.5">Kabut polutan naik terdeteksi</p>
+                    <h4 class="text-xs md:text-sm font-black text-white uppercase font-heading">Waspada Asap</h4>
+                    <p class="text-[11px] md:text-xs font-medium text-slate-400/70 mt-0.5">Kabut polutan naik terdeteksi</p>
                   </div>
                 </div>
-                <span class="font-mono text-xs font-bold text-[var(--accent-orange)]">&ge; 1000 PPM</span>
+                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-orange)]">&ge; 1000 PPM</span>
               </div>
-              <div class="bg-black/30 border border-white/[0.03] p-4 rounded-xl flex items-center justify-between">
+              <div class="bg-black/30 border border-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.01] p-4 rounded-xl flex items-center justify-between transition-all duration-300">
                 <div class="flex items-center gap-3">
                   <div class="p-1.5 bg-white/[0.02] border border-white/[0.05] rounded-lg">
                     <iconify-icon icon="solar:flame-bold" width="18" height="18" class="text-[var(--accent-red)]"></iconify-icon>
                   </div>
                   <div>
-                    <h4 class="text-xs font-black text-white uppercase font-heading">Kebakaran</h4>
-                    <p class="text-[10px] font-semibold text-slate-400/70 mt-0.5">Fisik lidah api aktif terdeteksi</p>
+                    <h4 class="text-xs md:text-sm font-black text-white uppercase font-heading">Kebakaran</h4>
+                    <p class="text-[11px] md:text-xs font-semibold text-slate-400/70 mt-0.5">Fisik lidah api aktif terdeteksi</p>
                   </div>
                 </div>
-                <span class="font-mono text-xs font-bold text-[var(--accent-red)]">CRITICAL</span>
+                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-red)]">CRITICAL</span>
               </div>
             </div>
           </div>
@@ -229,28 +243,31 @@
           <div class="flex flex-col gap-6 w-full">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-5 shadow-2xl backdrop-blur-2xl flex flex-col justify-between min-h-[130px]">
-                <span class="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-400/50 flex items-center gap-1"><iconify-icon icon="solar:chart-square-bold" class="text-[var(--status-color)]"></iconify-icon>Average Air Quality</span>
+                <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.15em] text-slate-400/50 flex items-center gap-1.5"><iconify-icon icon="solar:chart-square-bold" class="text-[var(--status-color)]" width="14" height="14"></iconify-icon>Average Air Quality</span>
                 <div class="mt-3">
-                  <div class="text-3xl font-black text-white tracking-tight font-heading">342 <span class="text-xs text-slate-500 font-mono font-normal">PPM</span></div>
-                  <p class="text-[10px] font-medium text-slate-500/60 mt-1 uppercase tracking-wide">Clean baseline average this week</p>
+                  <div id="avgGasValue" class="text-3xl md:text-4xl font-black text-white tracking-tight font-heading">-- <span class="text-xs md:text-sm text-slate-500 font-mono font-normal">PPM</span></div>
+                  <p class="text-[11px] md:text-xs font-medium text-slate-500/60 mt-1 uppercase tracking-wide">Session average baseline air quality</p>
                 </div>
               </div>
 
               <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-5 shadow-2xl backdrop-blur-2xl flex flex-col justify-between min-h-[130px]">
-                <span class="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-400/50 flex items-center gap-1"><iconify-icon icon="solar:shield-warning-bold" id="incidentShieldIcon" class="text-slate-500"></iconify-icon>Incident Triggers</span>
+                <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.15em] text-slate-400/50 flex items-center gap-1.5"><iconify-icon icon="solar:shield-warning-bold" id="incidentShieldIcon" class="text-slate-500" width="14" height="14"></iconify-icon>Incident Triggers</span>
                 <div class="mt-3">
-                  <div class="text-3xl font-black text-white tracking-tight font-heading"><span id="incidentCountTxt">0</span> <span class="text-xs text-slate-500 font-normal">Events</span></div>
-                  <p id="incidentSubTxt" class="text-[10px] font-medium text-slate-500/60 mt-1 uppercase tracking-wide">No incidents recorded</p>
+                  <div class="text-3xl md:text-4xl font-black text-white tracking-tight font-heading"><span id="incidentCountTxt">0</span> <span class="text-xs md:text-sm text-slate-500 font-normal">Events</span></div>
+                  <p id="incidentSubTxt" class="text-[11px] md:text-xs font-medium text-slate-500/60 mt-1 uppercase tracking-wide">No incidents recorded</p>
                 </div>
               </div>
             </div>
 
             <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-5 shadow-2xl backdrop-blur-2xl flex flex-col gap-3 min-h-[220px]">
-              <span class="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
-                <iconify-icon icon="solar:graph-bold" class="text-slate-400/60"></iconify-icon>Incident Timeline History (Level 2 & 3 Logs)
+              <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
+                <iconify-icon icon="solar:graph-bold" class="text-slate-400/60" width="14" height="14"></iconify-icon>Incident Timeline History (Level 2 & 3 Logs)
               </span>
               <div id="incidentLogsContainer" class="flex flex-col justify-center flex-grow gap-2">
-                <div class="w-full text-center py-6 text-[9px] font-bold text-slate-500/25 uppercase tracking-widest border border-dashed border-white/[0.05] rounded-xl select-none">No level 2 or 3 triggers recorded</div>
+                <div class="w-full text-center py-8 text-[10px] md:text-xs font-bold text-slate-500/30 uppercase tracking-widest border border-dashed border-white/[0.06] rounded-xl select-none flex flex-col items-center justify-center gap-2 bg-black/10">
+                  <iconify-icon icon="solar:shield-unique-bold" class="text-slate-500/20" width="24" height="24"></iconify-icon>
+                  <span>No level 2 or 3 triggers recorded</span>
+                </div>
               </div>
             </div>
           </div>
@@ -258,8 +275,8 @@
           <div class="flex flex-col gap-6 w-full">
             
             <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-5 shadow-2xl backdrop-blur-2xl flex flex-col gap-4">
-              <span class="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5 shrink-0">
-                <iconify-icon icon="solar:pulse-bold" class="text-slate-400/60"></iconify-icon>Hardware Diagnostic Tool
+              <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5 shrink-0">
+                <iconify-icon icon="solar:pulse-bold" class="text-slate-400/60" width="14" height="14"></iconify-icon>Hardware Diagnostic Tool
               </span>
               
               <div class="flex flex-col gap-4 py-1">
@@ -269,12 +286,12 @@
                       <iconify-icon icon="solar:atom-bold" width="14" height="14"></iconify-icon>
                     </div>
                     <div>
-                      <p class="font-bold text-xs text-white">MQ-2 Gas Core</p>
-                      <p class="text-[9px] font-medium text-slate-500/40 uppercase tracking-wide">Calibration Stability</p>
+                      <p class="font-bold text-xs md:text-sm text-white">MQ-2 Gas Core</p>
+                      <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wide">Calibration Stability</p>
                     </div>
                   </div>
                   <div class="text-right">
-                    <p class="font-mono text-[11px] font-bold text-[var(--accent-teal)]">Optimal</p>
+                    <p class="font-mono text-xs md:text-sm font-bold text-[var(--accent-teal)]">Optimal</p>
                     <div class="w-16 h-1 bg-black/40 rounded-full mt-1 overflow-hidden">
                       <div class="bg-[var(--accent-teal)] h-full w-[94%] rounded-full"></div>
                     </div>
@@ -287,32 +304,33 @@
                       <iconify-icon icon="solar:eye-bold" width="14" height="14"></iconify-icon>
                     </div>
                     <div>
-                      <p class="font-bold text-xs text-white">Flame Photodiode</p>
-                      <p class="text-[9px] font-medium text-slate-500/40 uppercase tracking-wide">Operational State</p>
+                      <p class="font-bold text-xs md:text-sm text-white">Flame Photodiode</p>
+                      <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wide">Operational State</p>
                     </div>
                   </div>
                   <div class="text-right">
-                    <p class="font-mono text-[11px] font-bold text-emerald-400">100% Ready</p>
+                    <p class="font-mono text-xs md:text-sm font-bold text-emerald-400">100% Ready</p>
                     <div class="w-16 h-1 bg-black/40 rounded-full mt-1 overflow-hidden">
                       <div class="bg-emerald-400 h-full w-[100%] rounded-full"></div>
                     </div>
                   </div>
                 </div>
 
+                <!-- FIX ID: HUBUNGKAN KE PARAMETER FREERAM DI FIREBASE -->
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-3">
                     <div class="w-7 h-7 bg-black/30 border border-white/[0.03] rounded-full flex items-center justify-center text-slate-400">
                       <iconify-icon icon="solar:bolt-circle-bold" width="14" height="14"></iconify-icon>
                     </div>
                     <div>
-                      <p class="font-bold text-xs text-white">ESP32 Power Rail</p>
-                      <p class="text-[9px] font-medium text-slate-500/40 uppercase tracking-wide">Voltage Stability</p>
+                      <p class="font-bold text-xs md:text-sm text-white">ESP32 Free Heap RAM</p>
+                      <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wide">Memory Management</p>
                     </div>
                   </div>
                   <div class="text-right">
-                    <p class="font-mono text-[11px] font-bold text-blue-400">3.31 V</p>
+                    <p id="freeRamTxt" class="font-mono text-xs md:text-sm font-bold text-blue-400">-- KB</p>
                     <div class="w-16 h-1 bg-black/40 rounded-full mt-1 overflow-hidden">
-                      <div class="bg-blue-400 h-full w-[98%] rounded-full"></div>
+                      <div id="freeRamBar" class="bg-blue-400 h-full w-[0%] transition-all duration-700 rounded-full"></div>
                     </div>
                   </div>
                 </div>
@@ -320,30 +338,32 @@
             </div>
 
             <div class="bg-white/[0.02] border border-white/[0.07] rounded-[1.5rem] p-5 shadow-2xl backdrop-blur-2xl flex flex-col gap-3">
-              <span class="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
-                <iconify-icon icon="solar:server-path-bold" class="text-slate-400/60"></iconify-icon>Network Gateway & Notification Logs
+              <span class="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-slate-400/50 select-none flex items-center gap-1.5">
+                <iconify-icon icon="solar:server-path-bold" class="text-slate-400/60" width="14" height="14"></iconify-icon>Network Gateway & Notification Logs
               </span>
-              <div class="flex flex-col gap-2 font-mono text-[10px]">
-                <div class="flex justify-between items-center bg-black/20 p-2.5 rounded-xl border border-white/[0.02]">
-                  <div class="flex items-center gap-2 text-slate-400">
-                    <iconify-icon icon="solar:check-circle-bold" class="text-emerald-400"></iconify-icon>
+              <div class="flex flex-col gap-2.5 font-sans">
+                <div class="flex justify-between items-center bg-black/35 hover:bg-black/50 p-3 rounded-xl border border-white/[0.04] transition-all duration-300 select-none">
+                  <div class="flex items-center gap-2.5 text-slate-200 font-medium text-xs md:text-sm">
+                    <iconify-icon icon="solar:check-circle-bold" class="text-emerald-400" width="16" height="16"></iconify-icon>
                     <span>MQTT Broker Link</span>
                   </div>
-                  <span class="text-emerald-400 font-bold">CONNECTED</span>
+                  <span class="text-emerald-400 font-bold font-mono tracking-wider text-xs md:text-sm">CONNECTED</span>
                 </div>
-                <div class="flex justify-between items-center bg-black/20 p-2.5 rounded-xl border border-white/[0.02]">
-                  <div class="flex items-center gap-2 text-slate-400">
-                    <iconify-icon icon="solar:wireless-bold" class="text-blue-400"></iconify-icon>
+                <!-- FIX ID: HUBUNGKAN KE PARAMETER PINGLATENCY DI FIREBASE -->
+                <div class="flex justify-between items-center bg-black/35 hover:bg-black/50 p-3 rounded-xl border border-white/[0.04] transition-all duration-300 select-none">
+                  <div class="flex items-center gap-2.5 text-slate-200 font-medium text-xs md:text-sm">
+                    <iconify-icon icon="solar:wireless-bold" class="text-blue-400" width="16" height="16"></iconify-icon>
                     <span>Ping Latency Cloud</span>
                   </div>
-                  <span class="text-white font-bold">24 ms (Stable)</span>
+                  <span id="pingLatencyTxt" class="text-white font-bold font-mono tracking-wider text-xs md:text-sm">-- ms</span>
                 </div>
-                <div class="flex justify-between items-center bg-black/20 p-2.5 rounded-xl border border-white/[0.02]">
-                  <div class="flex items-center gap-2 text-slate-400">
-                    <iconify-icon icon="solar:letter-bold" class="text-indigo-400"></iconify-icon>
+                <!-- FIX ID: HUBUNGKAN KE PARAMETER TELEGRAMSTATUS DI FIREBASE -->
+                <div class="flex justify-between items-center bg-black/35 hover:bg-black/50 p-3 rounded-xl border border-white/[0.04] transition-all duration-300 select-none">
+                  <div class="flex items-center gap-2.5 text-slate-200 font-medium text-xs md:text-sm">
+                    <iconify-icon icon="solar:letter-bold" class="text-indigo-400" width="16" height="16"></iconify-icon>
                     <span>Telegram API Status</span>
                   </div>
-                  <span class="text-indigo-400 font-bold">STANDBY</span>
+                  <span id="telegramStatusTxt" class="text-indigo-400 font-bold font-mono tracking-wider text-xs md:text-sm">STANDBY</span>
                 </div>
               </div>
             </div>
@@ -359,15 +379,17 @@
           <button
             id="tab-btn-dashboard"
             onclick="switchTab('dashboard')"
-            class="px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] text-[var(--status-color)] shadow-inner cursor-pointer"
+            class="px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] text-[var(--status-color)] shadow-inner cursor-pointer"
           >
+            <iconify-icon icon="solar:widget-bold" class="mr-1.5" width="14" height="14"></iconify-icon>
             Dashboard
           </button>
           <button
             id="tab-btn-detail"
             onclick="switchTab('detail')"
-            class="px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer"
+            class="px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer"
           >
+            <iconify-icon icon="solar:document-text-bold" class="mr-1.5" width="14" height="14"></iconify-icon>
             Detail
           </button>
         </div>
@@ -398,7 +420,6 @@
       const timeTxt = document.getElementById("timeTxt");
       const flameHistoryBarsContainer = document.getElementById("flameHistoryBarsContainer");
 
-      // DOM NODE COHESIVE COUPLING DETIL
       const incidentCountTxt = document.getElementById("incidentCountTxt");
       const incidentSubTxt = document.getElementById("incidentSubTxt");
       const incidentShieldIcon = document.getElementById("incidentShieldIcon");
@@ -411,7 +432,6 @@
       let lastKnownApiState = null;
       let flameBarsHistoryArray = Array(8).fill({ state: 'AMN', time: '15:00' });
 
-      // LOGIKA STORAGE INCIDENT SEKARANG MAKSIMAL DI-UPGRADE JADI 6 DATA LOGS
       let lastKnownSysState = null;
       let incidentCount = 0;
       let incidentLogsArray = []; 
@@ -488,12 +508,16 @@
         });
       }
 
-      // FIX INJECTOR TIMELINE: SEKARANG MENAMPUNG DAN MENAMPILKAN HINGGA 6 DATA LOGS
       function renderIncidentLogsTimeline() {
         incidentLogsContainer.innerHTML = '';
         
         if (incidentLogsArray.length === 0) {
-          incidentLogsContainer.innerHTML = `<div class="w-full text-center py-6 text-[9px] font-bold text-slate-500/25 uppercase tracking-widest border border-dashed border-white/[0.05] rounded-xl select-none">No level 2 or 3 triggers recorded</div>`;
+          incidentLogsContainer.innerHTML = `
+            <div class="w-full text-center py-8 text-[10px] md:text-xs font-bold text-slate-500/30 uppercase tracking-widest border border-dashed border-white/[0.06] rounded-xl select-none flex flex-col items-center justify-center gap-2 bg-black/10">
+              <iconify-icon icon="solar:shield-unique-bold" class="text-slate-500/20" width="24" height="24"></iconify-icon>
+              <span>No level 2 or 3 triggers recorded</span>
+            </div>
+          `;
           return;
         }
 
@@ -504,7 +528,7 @@
           const logItem = document.createElement('div');
           let isLevel3 = item.state === 'BHY';
           
-          logItem.className = `flex items-center justify-between p-2.5 rounded-xl border text-[10px] font-mono font-bold transition-all duration-500 ${
+          logItem.className = `flex items-center justify-between p-2.5 rounded-xl border text-[11px] md:text-xs font-mono font-bold transition-all duration-500 ${
             isLevel3 
             ? 'bg-[var(--accent-red)]/10 border-[var(--accent-red)]/20 text-[var(--accent-red)] shadow-[0_0_10px_rgba(255,0,84,0.08)]' 
             : 'bg-[var(--accent-orange)]/10 border-[var(--accent-orange)]/20 text-[var(--accent-orange)]'
@@ -534,19 +558,19 @@
         if (targetTab === 'dashboard') {
           dashboardView.classList.remove("hidden");
           detailView.classList.add("hidden");
-          detailView.classList.remove("grid"); // Reset flex layout grid detil
-          btnDashboard.className = "px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] shadow-inner cursor-pointer";
+          detailView.classList.remove("grid");
+          btnDashboard.className = "px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] shadow-inner cursor-pointer";
           btnDashboard.style.color = currentStatusColor;
-          btnDetail.className = "px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer";
+          btnDetail.className = "px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer";
           btnDetail.style.color = "";
           setTimeout(resizeCanvas, 60);
         } else {
           dashboardView.classList.add("hidden");
           detailView.classList.remove("hidden");
-          detailView.classList.add("grid"); // Set layout detil agar kolom responsive aktif
-          btnDetail.className = "px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] shadow-inner cursor-pointer";
+          detailView.classList.add("grid");
+          btnDetail.className = "px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center bg-white/[0.06] shadow-inner cursor-pointer";
           btnDetail.style.color = currentStatusColor;
-          btnDashboard.className = "px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer";
+          btnDashboard.className = "px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 h-9 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer";
           btnDashboard.style.color = "";
         }
       }
@@ -561,12 +585,83 @@
         if (data) {
           const updateTime = data.LastUpdate || "--:--";
 
+          // ===================================================================
+          // INJEKSI DATA TELEMETRI REAL-TIME DARI FIREBASE (BUKAN HARDCODED)
+          // ===================================================================
+          if(data.WifiRssi !== undefined) {
+            const wifiEl = document.getElementById("wifiRssi");
+            const rssi = parseInt(data.WifiRssi) || 0;
+            wifiEl.innerText = rssi + " dBm";
+            if (rssi >= -60) {
+              wifiEl.className = "font-bold text-emerald-400 tracking-wide text-sm md:text-base transition-colors duration-300";
+            } else if (rssi >= -80) {
+              wifiEl.className = "font-bold text-[var(--accent-orange)] tracking-wide text-sm md:text-base transition-colors duration-300";
+            } else {
+              wifiEl.className = "font-bold text-[var(--accent-red)] tracking-wide text-sm md:text-base transition-colors duration-300 animate-pulse";
+            }
+          }
+
+          if(data.CoreTemp !== undefined) {
+            const tempEl = document.getElementById("coreTemp");
+            const temp = parseFloat(data.CoreTemp) || 0;
+            tempEl.innerText = temp.toFixed(1) + " °C";
+            if (temp < 50) {
+              tempEl.className = "font-bold text-emerald-400 tracking-wide text-sm md:text-base transition-colors duration-300";
+            } else if (temp < 75) {
+              tempEl.className = "font-bold text-[var(--accent-orange)] tracking-wide text-sm md:text-base transition-colors duration-300";
+            } else {
+              tempEl.className = "font-bold text-[var(--accent-red)] tracking-wide text-sm md:text-base transition-colors duration-300 animate-pulse";
+            }
+          }
+
+          if(data.SysUptime !== undefined) document.getElementById("sysUptime").innerText = data.SysUptime;
+          
+          if(data.PingLatency !== undefined) {
+            const pingEl = document.getElementById("pingLatencyTxt");
+            const ping = parseInt(data.PingLatency) || 0;
+            pingEl.innerText = ping + " ms";
+            if (ping < 100) {
+              pingEl.className = "text-emerald-400 font-bold font-mono tracking-wider text-xs md:text-sm";
+            } else if (ping < 300) {
+              pingEl.className = "text-[var(--accent-orange)] font-bold font-mono tracking-wider text-xs md:text-sm";
+            } else {
+              pingEl.className = "text-[var(--accent-red)] font-bold font-mono tracking-wider text-xs md:text-sm animate-pulse";
+            }
+          }
+
+          if(data.FreeRAM !== undefined) {
+            document.getElementById("freeRamTxt").innerText = data.FreeRAM + " KB";
+            // Scale progress bar based on typical max heap (280KB)
+            const ramPercentage = Math.min(100, Math.max(0, Math.round((parseFloat(data.FreeRAM) / 280) * 100)));
+            const ramBar = document.getElementById("freeRamBar");
+            if (ramBar) ramBar.style.width = ramPercentage + "%";
+          }
+
+          if(data.TelegramStatus !== undefined) {
+            const telEl = document.getElementById("telegramStatusTxt");
+            telEl.innerText = data.TelegramStatus;
+            telEl.className = data.TelegramStatus === "SUCCESS" 
+              ? "text-emerald-400 font-bold font-mono tracking-wider text-xs md:text-sm" 
+              : "text-red-500 font-bold font-mono tracking-wider text-xs md:text-sm animate-pulse";
+          }
+          // ===================================================================
+
           const gas = data.NilaiGas || 0;
           gasValue.innerText = String(gas).padStart(4, '0');
           
           historyBuffer.shift();
           historyBuffer.push(gas);
           renderWaveChart();
+
+          // Calculate real-time session average air quality PPM
+          const validHistory = historyBuffer.filter(val => val > 0);
+          const activeBuffer = validHistory.length > 0 ? validHistory : historyBuffer;
+          const avgGas = Math.round(activeBuffer.reduce((a, b) => a + b, 0) / activeBuffer.length);
+          const avgGasEl = document.getElementById("avgGasValue");
+          if (avgGasEl) {
+            avgGasEl.innerHTML = `${avgGas} <span class="text-xs md:text-sm text-slate-500 font-mono font-normal">PPM</span>`;
+          }
+
 
           const api = data.StatusApi || "AMN";
           const stSistem = data.StatusSistem || "AMN";
@@ -581,7 +676,6 @@
             drawFlameHistoryBars();
           }
 
-          // DYNAMIC EVALUATION TIMELINE LOGGER LEVEL 2 & 3
           if (stSistem !== lastKnownSysState) {
             lastKnownSysState = stSistem;
             
@@ -592,10 +686,10 @@
               let currentBadgeColor = stSistem === "BHY" ? "text-[var(--accent-red)]" : "text-[var(--accent-orange)]";
               incidentShieldIcon.className = currentBadgeColor;
               incidentSubTxt.innerText = stSistem === "BHY" ? "CRITICAL INCIDENT ACTIVE" : "WARNING ALARM TRIGGERED";
-              incidentSubTxt.className = `text-[10px] font-bold ${currentBadgeColor} mt-1 uppercase tracking-wide`;
+              incidentSubTxt.className = `text-[11px] md:text-xs font-bold ${currentBadgeColor} mt-1 uppercase tracking-wide`;
 
               incidentLogsArray.unshift({ state: stSistem, time: updateTime });
-              if (incidentLogsArray.length > 6) { // UPGRADE BATAS KANCING HINGGA MAX 6 DATA
+              if (incidentLogsArray.length > 6) { 
                 incidentLogsArray.pop();
               }
               renderIncidentLogsTimeline();
