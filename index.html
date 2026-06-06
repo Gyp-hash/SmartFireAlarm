@@ -211,7 +211,7 @@
                     <p class="text-[11px] md:text-xs font-medium text-slate-400/70 mt-0.5">Kondisi udara normal & bersih</p>
                   </div>
                 </div>
-                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-teal)]">&lt; 1000 PPM</span>
+                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-teal)]">&lt; 2000 PPM</span>
               </div>
               <div class="bg-black/30 border border-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.01] p-4 rounded-xl flex items-center justify-between transition-all duration-300">
                 <div class="flex items-center gap-3">
@@ -223,7 +223,7 @@
                     <p class="text-[11px] md:text-xs font-medium text-slate-400/70 mt-0.5">Kabut polutan naik terdeteksi</p>
                   </div>
                 </div>
-                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-orange)]">&ge; 1000 PPM</span>
+                <span class="font-mono text-xs md:text-sm font-bold text-[var(--accent-orange)]">&ge; 2000 PPM</span>
               </div>
               <div class="bg-black/30 border border-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.01] p-4 rounded-xl flex items-center justify-between transition-all duration-300">
                 <div class="flex items-center gap-3">
@@ -316,7 +316,6 @@
                   </div>
                 </div>
 
-                <!-- FIX ID: HUBUNGKAN KE PARAMETER FREERAM DI FIREBASE -->
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-3">
                     <div class="w-7 h-7 bg-black/30 border border-white/[0.03] rounded-full flex items-center justify-center text-slate-400">
@@ -349,7 +348,6 @@
                   </div>
                   <span class="text-emerald-400 font-bold font-mono tracking-wider text-xs md:text-sm">CONNECTED</span>
                 </div>
-                <!-- FIX ID: HUBUNGKAN KE PARAMETER PINGLATENCY DI FIREBASE -->
                 <div class="flex justify-between items-center bg-black/35 hover:bg-black/50 p-3 rounded-xl border border-white/[0.04] transition-all duration-300 select-none">
                   <div class="flex items-center gap-2.5 text-slate-200 font-medium text-xs md:text-sm">
                     <iconify-icon icon="solar:wireless-bold" class="text-blue-400" width="16" height="16"></iconify-icon>
@@ -357,7 +355,6 @@
                   </div>
                   <span id="pingLatencyTxt" class="text-white font-bold font-mono tracking-wider text-xs md:text-sm">-- ms</span>
                 </div>
-                <!-- FIX ID: HUBUNGKAN KE PARAMETER TELEGRAMSTATUS DI FIREBASE -->
                 <div class="flex justify-between items-center bg-black/35 hover:bg-black/50 p-3 rounded-xl border border-white/[0.04] transition-all duration-300 select-none">
                   <div class="flex items-center gap-2.5 text-slate-200 font-medium text-xs md:text-sm">
                     <iconify-icon icon="solar:letter-bold" class="text-indigo-400" width="16" height="16"></iconify-icon>
@@ -585,9 +582,6 @@
         if (data) {
           const updateTime = data.LastUpdate || "--:--";
 
-          // ===================================================================
-          // INJEKSI DATA TELEMETRI REAL-TIME DARI FIREBASE (BUKAN HARDCODED)
-          // ===================================================================
           if(data.WifiRssi !== undefined) {
             const wifiEl = document.getElementById("wifiRssi");
             const rssi = parseInt(data.WifiRssi) || 0;
@@ -631,7 +625,6 @@
 
           if(data.FreeRAM !== undefined) {
             document.getElementById("freeRamTxt").innerText = data.FreeRAM + " KB";
-            // Scale progress bar based on typical max heap (280KB)
             const ramPercentage = Math.min(100, Math.max(0, Math.round((parseFloat(data.FreeRAM) / 280) * 100)));
             const ramBar = document.getElementById("freeRamBar");
             if (ramBar) ramBar.style.width = ramPercentage + "%";
@@ -644,7 +637,6 @@
               ? "text-emerald-400 font-bold font-mono tracking-wider text-xs md:text-sm" 
               : "text-red-500 font-bold font-mono tracking-wider text-xs md:text-sm animate-pulse";
           }
-          // ===================================================================
 
           const gas = data.NilaiGas || 0;
           gasValue.innerText = String(gas).padStart(4, '0');
@@ -653,7 +645,6 @@
           historyBuffer.push(gas);
           renderWaveChart();
 
-          // Calculate real-time session average air quality PPM
           const validHistory = historyBuffer.filter(val => val > 0);
           const activeBuffer = validHistory.length > 0 ? validHistory : historyBuffer;
           const avgGas = Math.round(activeBuffer.reduce((a, b) => a + b, 0) / activeBuffer.length);
@@ -661,7 +652,6 @@
           if (avgGasEl) {
             avgGasEl.innerHTML = `${avgGas} <span class="text-xs md:text-sm text-slate-500 font-mono font-normal">PPM</span>`;
           }
-
 
           const api = data.StatusApi || "AMN";
           const stSistem = data.StatusSistem || "AMN";
